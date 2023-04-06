@@ -7,7 +7,9 @@ const _ = require('lodash');
 
 const app = express();
 
-mongoose.connect('mongodb+srv://shubhamkumarece22:Mongodbat79351@clustertodo.zdtax2o.mongodb.net/todolistDB?retryWrites=true&w=majority');
+let mongoDBUrl = process.env.MONGODB_URL;
+
+mongoose.connect(mongoDBUrl);
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -145,6 +147,11 @@ app.get('/delete/:_id/:listTitle', (req, res) => {
 
 });
 
-app.listen(3000, () => {
+let port = process.env.PORT;
+if(port === null || port === ""){
+    port = 3000;
+}
+
+app.listen(port, () => {
     console.log('Todo app listening on port 3000!');
 });
