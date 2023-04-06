@@ -3,11 +3,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const _ = require('lodash');
+require('dotenv').config();
 
 
 const app = express();
 
-let mongoDBUrl = process.env.MONGODB_URL;
+let mongoDBUrl = process.env.MONGODB_URL || 'mongodb://localhost:27017';
 
 mongoose.connect(mongoDBUrl);
 
@@ -147,11 +148,11 @@ app.get('/delete/:_id/:listTitle', (req, res) => {
 
 });
 
-let port = process.env.PORT;
-if(port === null || port === ""){
-    port = 3000;
-}
+// let port = process.env.PORT;
+// if(port === null || port === ""){
+//     port = 4000;
+// }
 
-app.listen(port, () => {
+app.listen(3000, () => {
     console.log('Todo app listening on port 3000!');
 });
