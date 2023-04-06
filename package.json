@@ -1,15 +1,17 @@
 {
   "name": "todolist-v1",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run build",
+    "start": "node index.js"
   },
-  "author": "",
+  "author": "Shubham",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.2",
+    "build": "^0.1.4",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "lodash": "^4.17.21",
@@ -17,5 +19,14 @@
   },
   "devDependencies": {
     "eslint": "^8.37.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gitshubham45/todo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gitshubham45/todo/issues"
+  },
+  "homepage": "https://github.com/gitshubham45/todo#readme",
+  "description": ""
 }

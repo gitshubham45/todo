@@ -7,7 +7,7 @@ const _ = require('lodash');
 
 const app = express();
 
-mongoose.connect('mongodb+srv://shubhamkumarece22:Mongodbat79351@clustertodo.zdtax2o.mongodb.net/todolistDB');
+mongoose.connect('mongodb+srv://shubhamkumarece22:Mongodbat79351@clustertodo.zdtax2o.mongodb.net/todolistDB?retryWrites=true&w=majority');
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -63,7 +63,7 @@ app.get('/', (req, res) => {
 });
 
 
-let i = 0;
+
 app.get('/:customListName', (req, res) => {
 
     const customListName = _.capitalize(req.params.customListName);
