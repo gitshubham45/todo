@@ -21,6 +21,13 @@
     "lodash": "^4.17.21",
     "mongoose": "^7.0.3"
   },
+
+  "overrides": {
+    "js-yaml": "4.1.0",
+    "uglify-js": "3.17.4"
+    
+  },
+
   "devDependencies": {
     "eslint": "^8.37.0"
   },
