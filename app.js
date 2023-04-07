@@ -8,7 +8,7 @@ require('dotenv').config();
 
 const app = express();
 
-const mongoDBUrl =  process.env.MONGODB_URL || 'mongodb://127.0.0.1:27017/todolistDB';
+const mongoDBUrl =  process.env.MONGODB_URL;
 mongoose.connect(mongoDBUrl);
 
 app.set('view engine', 'ejs');
