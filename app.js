@@ -8,8 +8,8 @@ require('dotenv').config();
 
 const app = express();
 
-let mongoDBUrl = process.env.MONGODB_URL || 'mongodb://localhost:27017';
-
+//let mongoDBUrl = "mongodb+srv://shubhamkumarece22:Mongodbat79351@clustertodo.zdtax2o.mongodb.net/todolistDB?retryWrites=true&w=majority";
+const mongoDBUrl = 'mongodb://127.0.0.1:27017/todolistDB';
 mongoose.connect(mongoDBUrl);
 
 app.set('view engine', 'ejs');
@@ -100,17 +100,38 @@ app.post('/', function (req, res) {
     });
 
     if (listName === "Today") {
+        const savedItem = itemName;
         item.save();
-        res.redirect('/');
+
+        Item.findOne({ name: itemName })
+            .then((result) => {
+                res.json({ resultID: result._id });
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        //res.redirect('/');
     }
 
     else {
         List.findOne({ name: listName })
             .then((foundList) => {
                 if (foundList) {
+                    const savedItem = itemName;
                     foundList.items.push(item);
                     foundList.save();
-                    res.redirect('/' + listName);
+                    //res.redirect('/' + listName)
+                    console.log(foundList);
+
+                    const itemsArray = foundList.items;
+                    let savedItemId = "";
+
+                    itemsArray.forEach((item)=>{
+                        if(item.name === itemName) {
+                            savedItemId = item._id
+                        }}
+                    )  
+                    res.json({resultId : savedItemId});
                 }
             }).catch((err) => {
                 console.log(err);
@@ -123,27 +144,37 @@ app.get('/about', (req, res) => {
     res.render('about');
 });
 
-app.get('/delete/:_id/:listTitle', (req, res) => {
-    const itemID = req.params._id;
-    const listName = req.params.listTitle;
+app.post('/delete', (req, res) => {
+    const itemID = req.body._id;
+    const listName = req.body.listTitle;
 
     if (listName === "Today") {
         Item.findOneAndDelete({ _id: itemID })
             .then((result) => {
-                console.log(result);
+                console.log("from find one and delete Today");
+
             }).catch((err) => {
                 console.log(err);
             });
-            res.redirect('/');
+        //res.redirect('/');
+        Item.find()
+            .then((result) => {
+                console.log("delete success");
+                res.json({ newListItems: result });
+
+            }).catch((err) => {
+                console.log(err);
+            });
+
     }
-    else{
-        List.findOneAndUpdate({ name: listName},{$pull:{ items: { _id : itemID}}})
-        .then((result) => {
-            console.log(result);
-            res.redirect('/'+listName);
-        }).catch((err) => {
-            console.log(err);
-        });
+    else {
+        List.findOneAndUpdate({ name: listName }, { $pull: { items: { _id: itemID } } })
+            .then((result) => {
+                console.log(result);
+                //res.redirect('/'+listName);
+            }).catch((err) => {
+                console.log(err);
+            });
     }
 
 });

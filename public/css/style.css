@@ -103,11 +103,11 @@ input[type="text"]:focus {
   box-shadow: inset 0 -3px 0 0 #A683E3;
 }
 
-.del-btn{
-  
+.delete-btn{
   margin-left : auto;
-  margin-right: 10px;
+  margin-right: 15px;
   color: #00204a;
+  cursor: pointer;
 }
 
 a {

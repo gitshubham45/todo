@@ -6,24 +6,21 @@
     
 
     <form  class="item box main" action="/" method="post" >
-        <input autocomplete="off" placeholder="New item" type="text" name="newItem" >
-        <button type="submit" name="list" value="<%=listTitle%>" >+</button>
+        <input  id="myInput" autocomplete="off" placeholder="New item" type="text" name="newItem" >
+        <button  class="add-btn" type="submit" name="list" value="<%=listTitle%>" >+</button>
     </form>
 
   
 
     <div id="bigBox" class="box">
 
-       
-        
-
         <% newListItems.forEach((item)=> { %>
 
             
-                <div class="item">
+                <div id="<%= item._id %>bb" class="item">
                     <input type="checkbox"  >
                     <p > <%= item.name %> </p>
-                    <button class="del-btn"   type="submit" ><a href="/delete/<%= item._id %>/<%=listTitle%>"><i class="fa-solid fa-trash"></i></a></button>
+                    <i  name="<%=listTitle%>" id="<%= item._id %>" class="fa-solid fa-trash delete-btn"></i>
                 </div>
 
            
