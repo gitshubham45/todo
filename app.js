@@ -8,8 +8,7 @@ require('dotenv').config();
 
 const app = express();
 
-//let mongoDBUrl = "mongodb+srv://shubhamkumarece22:Mongodbat79351@clustertodo.zdtax2o.mongodb.net/todolistDB?retryWrites=true&w=majority";
-const mongoDBUrl = 'mongodb://127.0.0.1:27017/todolistDB';
+const mongoDBUrl =  'mongodb://127.0.0.1:27017/todolistDB';
 mongoose.connect(mongoDBUrl);
 
 app.set('view engine', 'ejs');
@@ -179,10 +178,8 @@ app.post('/delete', (req, res) => {
 
 });
 
-// let port = process.env.PORT;
-// if(port === null || port === ""){
-//     port = 4000;
-// }
+
+let port = process.env.PORT || 3000;
 
 app.listen(3000, () => {
     console.log('Todo app listening on port 3000!');
